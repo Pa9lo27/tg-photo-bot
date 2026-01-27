@@ -1,18 +1,19 @@
-version: '3.9'
+version: "3.9"
 services:
-  bot:
-    build: ./bot_service
-    env_file: ./bot_service/.env
-    depends_on:
-      - image
-      - user_state
+  bot_service:
+    build:
+      context: ./bot_service
+      dockerfile: ./Dockerfile
+    image: bot_service:latest
 
-  image:
-    build: ./image_service
-    ports:
-      - "8001:8001"
+  image_service:
+    build:
+      context: ./image_service
+      dockerfile: ./Dockerfile
+    image: image_service:latest
 
-  user_state:
-    build: ./user_state_service
-    ports:
-      - "8002:8002"
+  user_state_service:
+    build:
+      context: ./user_state_service
+      dockerfile: ./Dockerfile
+    image: user_state_service:latest
