@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, Form
 from fastapi.responses import FileResponse
-from PIпL import Image
+from PIL import Image
 import io
 
 app = FastAPI()
