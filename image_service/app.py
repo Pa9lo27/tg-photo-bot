@@ -1,9 +1,17 @@
 from fastapi import FastAPI, UploadFile, Form
-from fastapi.responses import FileResponse
+from fastapi.responses import StreamingResponse
+from io import BytesIO
 from PIL import Image
-import io
+import openai
+import os
 
 app = FastAPI()
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 @app.post("/process")
 async def process_image(
@@ -11,18 +19,24 @@ async def process_image(
     action: str = Form(...),
     size: int = Form(None)
 ):
-    # Читаємо фото
-    image = Image.open(file.file)
+    image = Image.open(file.file).convert("RGB")
+    buffered = BytesIO()
+    image.save(buffered, format="PNG")
+    buffered.seek(0)
 
-    # Тестова обробка
-    if action == "enhance":
-        # Просто робимо апскейл 2x
-        image = image.resize((image.width*2, image.height*2))
-    elif action == "expand" and size:
-        # Робимо апскейл до заданого розміру
-        image = image.resize((size, size))
+    prompt = "Покращити це фото, зробити чітким, без пікселів"
+    if action == "expand" and size:
+        prompt += f", та змінити розмір до {size}x{size}"
 
-    # Зберігаємо у тимчасовий файл
-    output_path = f"temp_output.jpg"
-    image.save(output_path)
-    return FileResponse(output_path, media_type="image/jpeg")
+    response = openai.images.edit(
+        image=buffered,
+        prompt=prompt,
+        size="1024x1024"
+    )
+
+    import base64
+    img_data = base64.b64decode(response['data'][0]['b64_json'])
+    result_image = BytesIO(img_data)
+    result_image.seek(0)
+
+    return StreamingResponse(result_image, media_type="image/png")
