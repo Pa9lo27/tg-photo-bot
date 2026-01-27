@@ -22,3 +22,15 @@ services:
     image: user_state_service:latest
     ports:
       - "8002:8002"
+  redis:
+    image: "redis:7-alpine"
+    ports:
+      - "6379:6379"
+
+  cli_service:
+      build: ./cli_service
+      container_name: cli_service
+      depends_on:
+        - image_service
+      environment:
+        - API_KEY=supersecretkey
