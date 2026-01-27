@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  bot:
+    build: ./bot_service
+    env_file: ./bot_service/.env
+    depends_on:
+      - image
+      - user_state
+
+  image:
+    build: ./image_service
+    ports:
+      - "8001:8001"
+
+  user_state:
+    build: ./user_state_service
+    ports:
+      - "8002:8002"
