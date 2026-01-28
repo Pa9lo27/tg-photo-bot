@@ -88,4 +88,4 @@
 
 [//]: # (Status)
 
-[//]: # (Wszystkie serwisy uruchomione i działające)
+[//]: # (Wszystkie serwisy uruchomione i działające).
