@@ -1,71 +1,91 @@
-# tg-photo-bot
+[//]: # (tg-photo-bot)
 
-# Telegram Bot do obrobki zdjęć z DALL-E
+[//]: # (Telegram Bot do obrobki zdjęć z DALL-E)
 
-## Uruchomienie
+[//]: # (Uruchomienie)
 
-```bash
-make up
-```
+[//]: # (make up)
 
-## Komponenty
+[//]: # (Komponenty)
 
-1. **Bot Service** - Telegram bot (python-telegram-bot)
-2. **Image Service** - FastAPI serwis obrobki (OpenAI DALL-E)
-3. **Redis** - Pub/Sub i cache
-4. **User State Service** - Zarządzanie stanem
+[//]: # (Bot Service – Telegram bot &#40;python-telegram-bot&#41;)
 
-## Funkcjonalność
+[//]: # (Image Service – FastAPI serwis obrobki &#40;OpenAI DALL-E&#41;)
 
-- ✅ Wysyłanie zdjęć przez Telegram
-- ✅ Obrobka przez DALL-E (enhance/expand)
-- ✅ Wybór rozmiaru (256x256, 512x512, 1024x1024)
-- ✅ Zwrot przetworzonego zdjęcia
+[//]: # (Redis – Pub/Sub i cache)
 
-## Protokoły Komunikacyjne
+[//]: # (User State Service – zarządzanie stanem użytkownika)
 
-### REST API
-- POST /process - Obrobka zdjęcia
-- POST /auth/login - Pobranie JWT tokena
-- GET /health - Status serwisu
+[//]: # (Funkcjonalność)
 
-### WebSocket
-- ws://image_service:8001/ws - Real-time powiadomienia
+[//]: # (Wysyłanie zdjęć przez Telegram)
 
-### Redis Pub/Sub
-- Kanał: photo_channel - Powiadomienia o gotowości
+[//]: # (Obróbka zdjęć przez DALL-E &#40;enhance / expand&#41;)
 
-## Bezpieczeństwo
+[//]: # (Wybór rozmiaru obrazu: 256x256, 512x512, 1024x1024)
 
-- JWT autentykacja na wszystkich endpoints
-- Token: Bearer <JWT_TOKEN>
-- Użytkownik: user, Hasło: password
+[//]: # (Zwrot przetworzonego zdjęcia do użytkownika)
 
-## Konfiguracja (.env)
+[//]: # (Protokoły komunikacyjne)
 
-```
-BOT_TOKEN=twój_telegram_token
-OPENAI_API_KEY=twój_openai_key
-JWT_USERNAME=user
-JWT_PASSWORD=password
-JWT_SECRET_KEY=secret-key
-```
+[//]: # (REST API)
 
-## Technologie
+[//]: # (POST /process – obróbka zdjęcia)
 
-- Python 3.11
-- FastAPI
-- Telegram Bot API
-- OpenAI DALL-E
-- Redis
-- Docker
+[//]: # (POST /auth/login – pobranie JWT tokena)
 
-## CLI Client
+[//]: # (GET /health – status serwisu)
 
-```bash
-docker compose run --rm cli_service python cli.py
-```
+[//]: # (WebSocket)
 
-## Status
+[//]: # (ws://image_service:8001/ws – powiadomienia w czasie rzeczywistym)
 
-Wszystkie serwisy uruchomione i działające ✅
+[//]: # (Redis Pub/Sub)
+
+[//]: # (Kanał: photo_channel – powiadomienia o gotowości obrazu)
+
+[//]: # (Bezpieczeństwo)
+
+[//]: # (JWT autentykacja na wszystkich endpointach)
+
+[//]: # (Nagłówek: Authorization: Bearer <JWT_TOKEN>)
+
+[//]: # (Dane testowe:)
+
+[//]: # (użytkownik: user)
+
+[//]: # (hasło: password)
+
+[//]: # (Konfiguracja &#40;.env&#41;)
+
+[//]: # (BOT_TOKEN=twój_telegram_token)
+
+[//]: # (OPENAI_API_KEY=twój_openai_key)
+
+[//]: # (JWT_USERNAME=user)
+
+[//]: # (JWT_PASSWORD=password)
+
+[//]: # (JWT_SECRET_KEY=secret-key)
+
+[//]: # (Technologie)
+
+[//]: # (Python 3.11)
+
+[//]: # (FastAPI)
+
+[//]: # (Telegram Bot API)
+
+[//]: # (OpenAI DALL-E)
+
+[//]: # (Redis)
+
+[//]: # (Docker)
+
+[//]: # (CLI Client)
+
+[//]: # (docker compose run --rm cli_service python cli.py)
+
+[//]: # (Status)
+
+[//]: # (Wszystkie serwisy uruchomione i działające)
