@@ -1,71 +1,46 @@
-# tg-photo-bot
-
-# Telegram Bot do obrobki zdjęć z DALL-E
-
-## Uruchomienie
-
-```bash
+tg-photo-bot
+Telegram Bot do obrobki zdjęć z DALL-E
+Uruchomienie
 make up
-```
-
-## Komponenty
-
-1. **Bot Service** - Telegram bot (python-telegram-bot)
-2. **Image Service** - FastAPI serwis obrobki (OpenAI DALL-E)
-3. **Redis** - Pub/Sub i cache
-4. **User State Service** - Zarządzanie stanem
-
-## Funkcjonalność
-
-- ✅ Wysyłanie zdjęć przez Telegram
-- ✅ Obrobka przez DALL-E (enhance/expand)
-- ✅ Wybór rozmiaru (256x256, 512x512, 1024x1024)
-- ✅ Zwrot przetworzonego zdjęcia
-
-## Protokoły Komunikacyjne
-
-### REST API
-- POST /process - Obrobka zdjęcia
-- POST /auth/login - Pobranie JWT tokena
-- GET /health - Status serwisu
-
-### WebSocket
-- ws://image_service:8001/ws - Real-time powiadomienia
-
-### Redis Pub/Sub
-- Kanał: photo_channel - Powiadomienia o gotowości
-
-## Bezpieczeństwo
-
-- JWT autentykacja na wszystkich endpoints
-- Token: Bearer <JWT_TOKEN>
-- Użytkownik: user, Hasło: password
-
-## Konfiguracja (.env)
-
-```
+Komponenty
+Bot Service – Telegram bot (python-telegram-bot)
+Image Service – FastAPI serwis obrobki (OpenAI DALL-E)
+Redis – Pub/Sub i cache
+User State Service – zarządzanie stanem użytkownika
+Funkcjonalność
+Wysyłanie zdjęć przez Telegram
+Obróbka zdjęć przez DALL-E (enhance / expand)
+Wybór rozmiaru obrazu: 256x256, 512x512, 1024x1024
+Zwrot przetworzonego zdjęcia do użytkownika
+Protokoły komunikacyjne
+REST API
+POST /process – obróbka zdjęcia
+POST /auth/login – pobranie JWT tokena
+GET /health – status serwisu
+WebSocket
+ws://image_service:8001/ws – powiadomienia w czasie rzeczywistym
+Redis Pub/Sub
+Kanał: photo_channel – powiadomienia o gotowości obrazu
+Bezpieczeństwo
+JWT autentykacja na wszystkich endpointach
+Nagłówek: Authorization: Bearer <JWT_TOKEN>
+Dane testowe:
+użytkownik: user
+hasło: password
+Konfiguracja (.env)
 BOT_TOKEN=twój_telegram_token
 OPENAI_API_KEY=twój_openai_key
 JWT_USERNAME=user
 JWT_PASSWORD=password
 JWT_SECRET_KEY=secret-key
-```
-
-## Technologie
-
-- Python 3.11
-- FastAPI
-- Telegram Bot API
-- OpenAI DALL-E
-- Redis
-- Docker
-
-## CLI Client
-
-```bash
+Technologie
+Python 3.11
+FastAPI
+Telegram Bot API
+OpenAI DALL-E
+Redis
+Docker
+CLI Client
 docker compose run --rm cli_service python cli.py
-```
-
-## Status
-
-Wszystkie serwisy uruchomione i działające ✅
+Status
+Wszystkie serwisy uruchomione i działające
