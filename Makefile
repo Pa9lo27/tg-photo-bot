@@ -11,4 +11,4 @@ logs:
 	docker compose logs -f
 
 tree:
-	tree -I 'frontend'
+	tree -I 'venv'

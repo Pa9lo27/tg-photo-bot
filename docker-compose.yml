@@ -10,10 +10,12 @@ services:
   image_service:
     build:
       context: ./image_service
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
     image: image_service:latest
     ports:
       - "8001:8001"
+    env_file:
+      - .env
 
   user_state_service:
     build:
@@ -22,15 +24,20 @@ services:
     image: user_state_service:latest
     ports:
       - "8002:8002"
+
   redis:
     image: "redis:7-alpine"
     ports:
       - "6379:6379"
 
   cli_service:
-      build: ./cli_service
-      container_name: cli_service
-      depends_on:
-        - image_service
-      environment:
-        - API_KEY=supersecretkey
+    build: ./cli_service
+    container_name: cli_service
+    depends_on:
+      - image_service
+    environment:
+      - API_KEY=supersecretkey
+    volumes:
+      - ./uploads:/app/uploads
+    stdin_open: true
+    tty: true
